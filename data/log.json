@@ -1,0 +1,47 @@
+[
+	{
+		"id" : 0,
+		"quantity" : 3,
+		"unit" : "tbsp",
+		"name" : "Peanut Butter",
+		"fat" : 8,
+		"carb" : 3,
+		"protein" : 4
+	},
+	{
+		"id" : 1,
+		"quantity" : 2,
+		"unit" : "ea",
+		"name" : "Egg",
+		"fat" : 5,
+		"carb" : 0,
+		"protein" : 6
+	},
+	{
+		"id" : 2,
+		"quantity" : 1,
+		"unit" : "med",
+		"name" : "Avocado",
+		"fat" : 29,
+		"carb" : 2,
+		"protein" : 4
+	},
+	{
+		"id" : 3,
+		"quantity" : 2,
+		"unit" : "pc",
+		"name" : "Bread",
+		"fat" : 1,
+		"carb" : 12,
+		"protein" : 3
+	},
+	{
+		"id" : 4,
+		"quantity" : 2,
+		"unit" : "cu in",
+		"name" : "Cheese",
+		"fat" : 6,
+		"carb" : 0,
+		"protein" : 4
+	}
+]

@@ -1,0 +1,130 @@
+[
+	{
+		"id" : 0,
+		"name" : "Egg",
+		"unit" : "ea",
+		"fat" : 5,
+		"carb" : 0,
+		"protein" : 6
+	},
+	{
+		"id" : 1,
+		"name" : "Bread",
+		"unit" : "pc",
+		"fat" : 1,
+		"carb" : 12,
+		"protein" : 3
+	},
+	{
+		"id" : 2,
+		"name" : "Bison",
+		"unit" : "6oz",
+		"fat" : 16,
+		"carb" : 0,
+		"protein" : 34
+	},
+	{
+		"id" : 3,
+		"name" : "Banana",
+		"unit" : "med",
+		"fat" : 0,
+		"carb" : 27,
+		"protein" : 1
+	},
+	{
+		"id" : 4,
+		"name" : "Avocado",
+		"unit" : "med",
+		"fat" : 29,
+		"carb" : 2,
+		"protein" : 4
+	},
+	{
+		"id" : 5,
+		"name" : "Bun",
+		"unit" : "ea",
+		"fat" : 2,
+		"carb" : 28,
+		"protein" : 5
+	},
+	{
+		"id" : 6,
+		"name" : "Peanut Butter",
+		"unit" : "tbsp",
+		"fat" : 8,
+		"carb" : 3,
+		"protein" : 4
+	},
+	{
+		"id" : 7,
+		"name" : "Olive Oil",
+		"unit" : "tbsp",
+		"fat" : 14,
+		"carb" : 0,
+		"protein" : 0
+	},
+	{
+		"id" : 8,
+		"name" : "Protein Bar (Clif)",
+		"unit" : "bar",
+		"fat" : 9,
+		"carb" : 31,
+		"protein" : 20
+	},
+	{
+		"id" : 9,
+		"name" : "Protein Bar (Pure)",
+		"unit" : "bar",
+		"fat" : 7,
+		"carb" : 17,
+		"protein" : 20
+	},
+	{
+		"id" : 10,
+		"name" : "Cheese",
+		"unit" : "cu in",
+		"fat" : 6,
+		"carb" : 0,
+		"protein" : 4
+	},
+	{
+		"id" : 11,
+		"name" : "Protein Shake",
+		"unit" : "scoop",
+		"fat" : 2,
+		"carb" : 43,
+		"protein" : 16
+	},
+	{
+		"id" : 12,
+		"name" : "Rice",
+		"unit" : "cup",
+		"fat" : 0,
+		"carb" : 45,
+		"protein" : 4
+	},
+	{
+		"id" : 13,
+		"name" : "Sweet Potato",
+		"unit" : "med",
+		"fat" : 0,
+		"carb" : 26,
+		"protein" : 2
+	},
+	{
+		"id" : 14,
+		"name" : "SBUX Oat Latte",
+		"unit" : "grande",
+		"fat" : 7,
+		"carb" : 19,
+		"protein" : 12
+	},
+	{
+		"id" : 15,
+		"name" : "SBUX Beyond Meat",
+		"unit" : "ea",
+		"fat" : 19,
+		"carb" : 31,
+		"protein" : 25
+	}
+]
