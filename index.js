@@ -1,10 +1,13 @@
+require('dotenv').config();
 const express = require('express');
-const http = require('http');
 const app = express();
-const path = require('path');
 const cors = require('cors');
-const server = http.createServer(app);
+const mongoose = require('mongoose');
+const connectDB = require('./config/dbCon');
 const PORT = process.env.PORT || 3500;
+
+// CONNECT TO MONGODB ---
+connectDB();
 
 // CORS ---
 const allowedOrigins = [
@@ -24,47 +27,17 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// API ROUTES ---
-app.get('/api/food', (req, res) => {
-	res.sendFile(path.join(__dirname, 'data', 'food.json'));
-});
+// FOR URLENCODED FORM DATA
+app.use(express.urlencoded({ extended: false }));
 
-app.post('/api/food/create', (req, res) => {
-	const food = data.foods.find;
-	res.json({
-		id: req.body.id,
-		quantity: req.body.quantity,
-		unit: req.body.unit,
-		name: req.body.name,
-		fat: req.body.fat,
-		carb: req.body.carb,
-		protein: req.body.protein,
-	});
-});
+// FOR JSON ---
+app.use(express.json());
 
-app.get('/api/log', (req, res) => {
-	res.sendFile(path.join(__dirname, 'data', 'log.json'));
-});
-
-const data = {
-	logs: require('./data/log.json'),
-	setLogs: function (data) {
-		this.logs = data;
-	},
-};
-console.log(data.logs);
-
-app.delete('/api/log/delete', (req, res) => {
-	const log = data.logs.find((logitem) => logitem.id === parseInt(req.body.id));
-	if (!log) {
-		return res.status(400).json({ message: `Log ID ${req.body.id} not found` });
-	}
-	const filteredArray = data.logs.filter(
-		(logitem) => logitem.id !== parseInt(req.body.id)
-	);
-	data.setLogs([...filteredArray]);
-	res.json(data.logs);
-});
+// ROUTES ---
+app.use('/', require('./routes/create'));
 
 // LISTEN ---
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+mongoose.connection.once('open', () => {
+	console.log('Connected to MongoDB');
+	app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+});
