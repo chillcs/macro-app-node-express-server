@@ -1,6 +1,12 @@
 const Food = require('../model/Food');
 
-const handleNewFood = async (req, res) => {
+const getFood = async (req, res) => {
+	const foods = await Food.find();
+	if (!foods) return res.status(204).json({ message: 'No food found' });
+	res.json(foods);
+};
+
+const createFood = async (req, res) => {
 	const { name, unit, fat, carb, protein } = req.body;
 	try {
 		const result = await Food.create({
@@ -17,4 +23,4 @@ const handleNewFood = async (req, res) => {
 	}
 };
 
-module.exports = { handleNewFood };
+module.exports = { getFood, createFood };

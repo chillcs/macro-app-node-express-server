@@ -34,7 +34,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // ROUTES ---
-app.use('/', require('./routes/create'));
+app.use('/food', require('./routes/food'));
+app.use('/log', require('./routes/log'));
 
 // LISTEN ---
 mongoose.connection.once('open', () => {
