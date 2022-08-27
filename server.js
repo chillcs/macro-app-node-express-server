@@ -26,6 +26,7 @@ app.use(cookieParser());
 
 // ROUTES ---
 app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', require('./routes/root'));
 app.use('/food', require('./routes/food'));
 app.use('/log', require('./routes/log'));
 
