@@ -1,21 +1,25 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Macro app by cStudio",
+  "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "node server.js",
     "dev": "nodemon server"
   },
   "author": "Curtis Hill",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "date-fns": "^2.29.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^6.5.2",
     "mongoose": "^6.5.2",
+    "mongoose-sequence": "^5.3.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
