@@ -7,9 +7,11 @@ const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const connectDB = require('./config/dbCon');
 const mongoose = require('mongoose');
+const Food = require('./model/Food');
+const Log = require('./model/Log');
 const PORT = process.env.PORT || 3500;
 
-// MONGODB ---
+// MONGO ---
 connectDB();
 
 // CORS ---
@@ -29,6 +31,32 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/root'));
 app.use('/food', require('./routes/food'));
 app.use('/log', require('./routes/log'));
+
+app.delete('/food/:id', (req, res) => {
+	Food.findByIdAndDelete(req.params.id)
+		.then((food) => {
+			if (!food) {
+				return res.status(404).send();
+			}
+			res.send(food);
+		})
+		.catch((error) => {
+			res.status(500).send(error);
+		});
+});
+
+app.delete('/log/:id', (req, res) => {
+	Log.findByIdAndDelete(req.params.id)
+		.then((log) => {
+			if (!log) {
+				return res.status(404).send();
+			}
+			res.send(log);
+		})
+		.catch((error) => {
+			res.status(500).send(error);
+		});
+});
 
 app.all('*', (req, res) => {
 	res.status(404);
