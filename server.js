@@ -78,11 +78,10 @@ app.post('/food/create', (req, res) => {
 		carb: req.body.carb,
 		protein: req.body.protein,
 	});
-	res.status(201);
 });
 
 // Food (delete) ---
-app.delete('/food/:id', (req, res) => {
+app.delete('/food/delete/:id', (req, res) => {
 	Food.findByIdAndDelete(req.params.id).then(() => {
 		res.send();
 	});
@@ -109,11 +108,10 @@ app.post('/log/create', (req, res) => {
 		carb: req.body.carb,
 		protein: req.body.protein,
 	});
-	res.status(201);
 });
 
 // Log (delete) ---
-app.delete('/log/:id', (req, res) => {
+app.delete('/log/delete/:id', (req, res) => {
 	Log.findByIdAndDelete(req.params.id).then(() => {
 		res.send();
 	});
