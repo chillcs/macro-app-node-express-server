@@ -4,69 +4,124 @@ const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const corsOptions = require('./config/corsOptions');
-const connectDB = require('./config/dbCon');
 const mongoose = require('mongoose');
 const Food = require('./model/Food');
 const Log = require('./model/Log');
 const PORT = process.env.PORT || 3500;
 
 // MONGO ---
+const connectDB = async () => {
+	try {
+		await mongoose.connect(process.env.DATABASE_URI, {
+			useUnifiedTopology: true,
+			useNewUrlParser: true,
+		});
+	} catch (err) {
+		console.error(err);
+	}
+};
 connectDB();
 
 // CORS ---
+const allowedOrigins = [
+	'http://10.0.0.84:3000',
+	'http://localhost:3000',
+	'https://www.macro.cstudio.ca',
+	'https://macro.cstudio.ca',
+];
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+	credentials: true,
+	optionsSuccessStatus: 200,
+};
 app.use(cors(corsOptions));
 
-// FOR URLENCODED FORM DATA
+// URLENCODED FORM DATA
 app.use(express.urlencoded({ extended: false }));
 
-// FOR JSON ---
+// JSON ---
 app.use(express.json());
 
 // COOKIE PARSER ---
 app.use(cookieParser());
 
 // ROUTES ---
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/', require('./routes/root'));
-app.use('/food', require('./routes/food'));
-app.use('/log', require('./routes/log'));
 
+// Root ---
+app.get('/', (req, res) => {
+	res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+// Food (get) ---
+app.get('/food', (req, res) => {
+	Food.find((err, result) => {
+		if (err) {
+			res.send(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
+// Food (create) ---
+app.post('/food/create', (req, res) => {
+	Food.create({
+		name: req.body.name,
+		unit: req.body.unit,
+		fat: req.body.fat,
+		carb: req.body.carb,
+		protein: req.body.protein,
+	});
+	res.status(201);
+});
+
+// Food (delete) ---
 app.delete('/food/:id', (req, res) => {
-	Food.findByIdAndDelete(req.params.id)
-		.then((food) => {
-			if (!food) {
-				return res.status(404).send();
-			}
-			res.send(food);
-		})
-		.catch((error) => {
-			res.status(500).send(error);
-		});
+	Food.findByIdAndDelete(req.params.id).then(() => {
+		res.send();
+	});
 });
 
+// Log (get) ---
+app.get('/log', (req, res) => {
+	Log.find((err, result) => {
+		if (err) {
+			res.send(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
+// Log (create) ---
+app.post('/log/create', (req, res) => {
+	Log.create({
+		quantity: req.body.quantity,
+		unit: req.body.unit,
+		name: req.body.name,
+		fat: req.body.fat,
+		carb: req.body.carb,
+		protein: req.body.protein,
+	});
+	res.status(201);
+});
+
+// Log (delete) ---
 app.delete('/log/:id', (req, res) => {
-	Log.findByIdAndDelete(req.params.id)
-		.then((log) => {
-			if (!log) {
-				return res.status(404).send();
-			}
-			res.send(log);
-		})
-		.catch((error) => {
-			res.status(500).send(error);
-		});
+	Log.findByIdAndDelete(req.params.id).then(() => {
+		res.send();
+	});
 });
 
+// Catch all 404 ---
 app.all('*', (req, res) => {
-	res.status(404);
-	if (req.accepts('html')) {
-		res.sendFile(path.join(__dirname, 'views', '404.html'));
-	} else if (req.accepts('json')) {
-		res.json({ message: '404 Not Found' });
-	} else {
-		res.type('txt').send('404 Not Found');
-	}
+	res.sendFile(path.join(__dirname, 'views', '404.html'));
 });
 
 // LISTEN ---
